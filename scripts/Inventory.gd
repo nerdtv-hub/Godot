@@ -12,8 +12,14 @@ func add_item(id: String, amount: int = 1) -> void:
 	emit_signal("changed")
 	
 	
-func remove_item(id: String, amount: int = -1) -> void:
-	items[id] = int(items.get(id, 0)) - amount
+func remove_item(id: String, amount: int = 1) -> void:
+	#items[id] = int(items.get(id, 0)) - amount
+	#emit_signal("changed")
+	if not items.has(id):
+		return
+	items[id] = int(items[id]) - amount
+	if items[id] <= 0:
+		items.erase(id)
 	emit_signal("changed")
 	
 func set_hotbar_selected(i: int) -> void:

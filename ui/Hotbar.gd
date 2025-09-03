@@ -47,11 +47,16 @@ func _update_all() -> void:
 		if i < ids.size():
 			var id: String = ids[i]
 			var info := ItemDB.get_info(id)
+			var amount := Inventory.count(id)
 			icon.texture = info.icon if info != null else null
-			count.text = str(Inventory.count(id))
+			icon.visible = amount > 0
+			count.text = str(amount) if amount > 0 else ""
+			count.visible = amount > 0
 		else:
 			icon.texture = null
+			icon.visible = false
 			count.text = ""
+			count.visible = false
 	_update_selection()
 
 func _update_selection() -> void:
