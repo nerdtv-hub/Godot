@@ -15,6 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var n: int = event.keycode - KEY_1
 		if n >= 0 and n < slot_count:
 			Inventory.set_hotbar_selected(n)
+			print(n)
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			Inventory.set_hotbar_selected(Inventory.hotbar_selected - 1)

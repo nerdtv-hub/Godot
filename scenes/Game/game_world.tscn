@@ -11,7 +11,10 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cemht"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_7f0ka"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_503d7"]
+top_radius = 0.0
+bottom_radius = 0.35
+height = 1.25
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tdgyr"]
 size = Vector3(250, 1, 250)
@@ -76,7 +79,9 @@ shape = SubResource("ConvexPolygonShape3D_cemht")
 debug_shape_custom_color = Color(0.828542, 0, 0.477452, 1)
 
 [node name="ReachCone" type="MeshInstance3D" parent="Player/Head/ReachCast"]
-mesh = SubResource("CylinderMesh_7f0ka")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.625)
+visible = false
+mesh = SubResource("CylinderMesh_503d7")
 script = ExtResource("2_vmowd")
 
 [node name="Floor" type="StaticBody3D" parent="."]

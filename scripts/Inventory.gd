@@ -10,7 +10,12 @@ var hotbar_selected: int = 0
 func add_item(id: String, amount: int = 1) -> void:
 	items[id] = int(items.get(id, 0)) + amount
 	emit_signal("changed")
-
+	
+	
+func remove_item(id: String, amount: int = -1) -> void:
+	items[id] = int(items.get(id, 0)) - amount
+	emit_signal("changed")
+	
 func set_hotbar_selected(i: int) -> void:
 	hotbar_selected = clamp(i, 0, HOTBAR_SIZE - 1)
 	emit_signal("hotbar_selected_changed", hotbar_selected)

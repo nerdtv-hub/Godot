@@ -15,8 +15,8 @@ extends CharacterBody3D
 
 @export var interact_distance: float = 5
 
-@export var reach_distance: float = 12
-@export var reach_radius: float = 6
+@export var reach_distance: float = 3
+@export var reach_radius: float = 1.25
 
 
 @onready var head: Node3D = $Head
@@ -33,6 +33,7 @@ var cone_local := Transform3D(
 		.rotated(Vector3.UP, PI),           # +Z → -Z (180° Flip)
 	Vector3(0, 0, -reach_distance * 0.5)       # +Z → Spitze im Head
 )
+
 
 
 func _ready() -> void:
@@ -165,8 +166,10 @@ func _process(_delta: float) -> void:
 			if target and target.has_method("interact"):
 				target.interact(self)
 				return
-#		_debug_dump_ray()
-				
+	if Input.is_action_just_pressed("drop"):
+		_drop_selected()
+		#_debug_dump_ray()
+
 func _resolve_interactable_from_collider(hit: Object) -> Node:
 	var node: Node = hit as Node
 	while node:
@@ -174,6 +177,31 @@ func _resolve_interactable_from_collider(hit: Object) -> Node:
 			return node
 		node = node.get_parent()
 	return null
+	
+	
+func _drop_selected() -> void:
+	var ids := Inventory.get_hotbar_ids()
+	if Inventory.hotbar_selected >= ids.size():
+			print(ids)
+			return
+			
+	var id := ids[Inventory.hotbar_selected]
+	if Inventory.count(id) <= 0:
+			print(id)
+			return
+			
+	Inventory.remove_item(id, 1)
+	var drop := RigidBody3D.new()
+	drop.set_script(load("res://scripts/ItemPickup.gd"))
+	drop.item_id = id
+	var mesh := MeshInstance3D.new()
+	mesh.mesh = BoxMesh.new()
+	drop.add_child(mesh)
+	var coll := CollisionShape3D.new()
+	coll.shape = BoxShape3D.new()
+	drop.add_child(coll)
+	drop.global_position = global_position + Vector3.UP - camera_pivot.global_transform.basis.z * 2.0
+	get_parent().add_child(drop)
 	
 	
 #func _debug_dump_ray() -> void:
