@@ -182,26 +182,17 @@ func _resolve_interactable_from_collider(hit: Object) -> Node:
 func _drop_selected() -> void:
 	var ids := Inventory.get_hotbar_ids()
 	if Inventory.hotbar_selected >= ids.size():
-			print(ids)
 			return
-			
 	var id := ids[Inventory.hotbar_selected]
 	if Inventory.count(id) <= 0:
-			print(id)
 			return
-			
 	Inventory.remove_item(id, 1)
-	var drop := RigidBody3D.new()
-	drop.set_script(load("res://scripts/ItemPickup.gd"))
-	drop.item_id = id
-	var mesh := MeshInstance3D.new()
-	mesh.mesh = BoxMesh.new()
-	drop.add_child(mesh)
-	var coll := CollisionShape3D.new()
-	coll.shape = BoxShape3D.new()
-	drop.add_child(coll)
-	drop.global_position = global_position + Vector3.UP - camera_pivot.global_transform.basis.z * 2.0
+	var drop := ItemDB.create_pickup(id)
+	if drop == null:
+		return
 	get_parent().add_child(drop)
+	var forward := -camera_pivot.global_transform.basis.z.normalized()
+	drop.global_position = head.global_position + forward * 2.0 - Vector3.UP * 0.5
 	
 	
 #func _debug_dump_ray() -> void:

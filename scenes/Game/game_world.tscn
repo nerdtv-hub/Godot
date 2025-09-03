@@ -123,6 +123,50 @@ skeleton = NodePath("../..")
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.38419e-07, 0, 0)
 shape = SubResource("BoxShape3D_dspdu")
 
+[node name="Stone_3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99931, 1.37265, -5.55885)
+mass = 6.0
+script = ExtResource("3_ctpq8")
+item_id = "stone"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stone_3"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("BoxMesh_qxlty")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_3"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.38419e-07, 0, 0)
+shape = SubResource("BoxShape3D_dspdu")
+
+[node name="Stone_4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00231, 1.37265, -5.55885)
+mass = 6.0
+script = ExtResource("3_ctpq8")
+item_id = "stone"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stone_4"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("BoxMesh_qxlty")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_4"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.38419e-07, 0, 0)
+shape = SubResource("BoxShape3D_dspdu")
+
+[node name="Stone_5" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44977, 1.37265, -9.82112)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "stone"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stone_5"]
+mesh = SubResource("BoxMesh_qxlty")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 0, 0)
+shape = SubResource("BoxShape3D_dspdu")
+
 [node name="Wood_1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2878, 2.73634, -11.2395)
 mass = 4.0
@@ -150,5 +194,95 @@ mesh = SubResource("CylinderMesh_or1u5")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54015, 2.73634, -6.15046)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_3"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_3"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41209, 2.73634, -6.15046)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_5" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.41209, 2.73634, -9.04487)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_5"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_5"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_6" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3674, 2.73634, -10.3952)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_6"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_6"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_7" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.81447, 2.73634, -14.4732)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_7"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_7"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_8" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 8.81447, 4.2395, -10.1553)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_8"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_8"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
 shape = SubResource("CylinderShape3D_il0nj")

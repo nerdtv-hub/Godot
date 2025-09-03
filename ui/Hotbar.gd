@@ -61,10 +61,12 @@ func _update_all() -> void:
 
 func _update_selection() -> void:
 	var box := get_node("HBoxContainer") as HBoxContainer
+	
+
 	for i in range(slot_count):
 		var slot := box.get_child(i) as Control
 		slot.modulate = Color(1, 1, 1, 1) if i == Inventory.hotbar_selected else Color(0.8, 0.8, 0.8, 1)
-		
+
 func ensure_slot_layout(slot: Control) -> void:
 	slot.clip_contents = true
 	slot.custom_minimum_size = Vector2(64, 64)
