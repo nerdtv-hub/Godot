@@ -1,0 +1,71 @@
+extends Control
+@export var slot_count: int = 24
+
+func _ready() -> void:
+	visible = false
+	var grid := $GridContainer as GridContainer
+	for i in range(grid.get_child_count()):
+		_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
+	Inventory.changed.connect(func(): if visible: _update_all())
+	_update_all()
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("inventory_toggle"):
+		visible = not visible
+		if visible:
+			_update_all()
+
+func _update_all() -> void:
+	var grid := $GridContainer as GridContainer
+	var ids: Array[String] = Inventory.get_sorted_ids()
+
+	for i in range(grid.get_child_count()):
+		var slot := grid.get_child(i) as Control
+
+		var icon := slot.get_node_or_null("Icon") as TextureRect
+		if icon == null:
+			var arc := slot.get_node_or_null("IconARC") as AspectRatioContainer
+			if arc:
+				icon = arc.get_node_or_null("Icon") as TextureRect
+
+		var count := slot.get_node_or_null("Count") as Label
+		if icon == null or count == null:
+			continue
+
+		if i < ids.size():
+			var id: String = ids[i]
+			var info: Variant = ItemDB.get_info(id)
+			icon.texture = info.icon if info != null else null
+			count.text = str(Inventory.count(id))
+		else:
+			icon.texture = null
+			count.text = ""
+
+func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
+	slot.clip_contents = true
+	slot.custom_minimum_size = min_size
+	slot.scale = Vector2.ONE
+	slot.size_flags_horizontal = Control.SIZE_FILL
+	slot.size_flags_vertical = Control.SIZE_FILL
+	
+
+	var icon := slot.get_node_or_null("Icon") as TextureRect
+	if icon:
+		icon.set_anchors_preset(Control.PRESET_FULL_RECT)
+		icon.offset_left = 0
+		icon.offset_top = 0
+		icon.offset_right = 0
+		icon.offset_bottom = 0
+		icon.size_flags_horizontal = Control.SIZE_FILL
+		icon.size_flags_vertical = Control.SIZE_FILL
+
+		icon.ignore_texture_size = true
+		# Wähle einen:
+		icon.stretch_mode = TextureRect.STRETCH_SCALE                # exakt in Slot
+		#icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED   # reinpassen, Seitenverhältnis
+
+	var count := slot.get_node_or_null("Count") as Label
+	if count:
+		count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		count.text = ""

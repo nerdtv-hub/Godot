@@ -1,0 +1,159 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb11fp5xfhldp"]
+
+[ext_resource type="Script" path="res://ui/Hotbar.gd" id="1_pykpp"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_pykpp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -206.0
+offset_top = -62.23
+offset_right = 206.0
+offset_bottom = -14.23
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_left = 24.0
+offset_right = 64.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel2" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel2"]
+layout_mode = 0
+offset_left = 20.0
+offset_right = 60.0
+offset_bottom = 40.0
+expand_mode = 5
+stretch_mode = 3
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel2"]
+layout_mode = 0
+offset_left = -4.0
+offset_right = 36.0
+offset_bottom = 23.0
+
+[node name="Panel3" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel3"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 56.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel3"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 32.0
+offset_bottom = 23.0
+
+[node name="Panel4" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel4"]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 52.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel4"]
+layout_mode = 0
+offset_left = -12.0
+offset_right = 28.0
+offset_bottom = 23.0
+
+[node name="Panel5" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel5"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 4.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel5"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 5.0
+offset_bottom = 31.0
+
+[node name="Panel6" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel6"]
+layout_mode = 2
+offset_left = -4.0
+offset_right = -4.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel6"]
+layout_mode = 0
+offset_left = -24.0
+offset_right = 16.0
+offset_bottom = 23.0
+
+[node name="Panel7" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel7"]
+layout_mode = 2
+offset_left = -8.0
+offset_right = -8.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel7"]
+layout_mode = 0
+offset_left = -28.0
+offset_right = 12.0
+offset_bottom = 23.0
+
+[node name="Panel8" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Panel8"]
+layout_mode = 2
+offset_left = -8.0
+offset_right = -8.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="HBoxContainer/Panel8"]
+layout_mode = 0
+offset_left = -28.0
+offset_right = 12.0
+offset_bottom = 23.0

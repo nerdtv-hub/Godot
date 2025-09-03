@@ -1,0 +1,149 @@
+[gd_scene load_steps=16 format=3 uid="uid://c4naigkk10ri6"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_yo1nn"]
+[ext_resource type="Texture2D" uid="uid://bbv7rd80vdo7t" path="res://assets/grid_texture.png" id="2_ejvxo"]
+[ext_resource type="Script" path="res://scenes/Game/reach_cone.gd" id="2_vmowd"]
+[ext_resource type="Script" path="res://scripts/ItemPickup.gd" id="3_ctpq8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4kgf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wsf45"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cemht"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7f0ka"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tdgyr"]
+size = Vector3(250, 1, 250)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5waxb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdkoc"]
+shading_mode = 0
+albedo_color = Color(0.235294, 0.607843, 1, 1)
+albedo_texture = ExtResource("2_ejvxo")
+uv1_scale = Vector3(55, 55, 55)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qxlty"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dspdu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_or1u5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_il0nj"]
+
+[node name="GameWorld" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59503, 3.39217, -0.378142)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.821149, 0.570714, 0, -0.570714, 0.821149, 0, 6.36461, 7.25033)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.336783, 0)
+script = ExtResource("1_yo1nn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_g4kgf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929745, 0)
+gi_mode = 2
+mesh = SubResource("CapsuleMesh_wsf45")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="CameraPivot" type="SpringArm3D" parent="Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 1, 0.2, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19563, 0.0415823)
+current = true
+fov = 90.0
+
+[node name="InteractRay" type="RayCast3D" parent="Player/Head"]
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, -0.0224872, 5.96046e-07)
+enabled = false
+target_position = Vector3(0, 0, -3)
+debug_shape_custom_color = Color(0.909184, 0, 0.2528, 1)
+debug_shape_thickness = 5
+
+[node name="ReachCast" type="ShapeCast3D" parent="Player/Head"]
+shape = SubResource("ConvexPolygonShape3D_cemht")
+debug_shape_custom_color = Color(0.828542, 0, 0.477452, 1)
+
+[node name="ReachCone" type="MeshInstance3D" parent="Player/Head/ReachCast"]
+mesh = SubResource("CylinderMesh_7f0ka")
+script = ExtResource("2_vmowd")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_tdgyr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(-250, 8.74228e-08, 0, -2.18557e-05, -1, 0, 0, 0, 250, 0, 0, 0)
+mesh = SubResource("BoxMesh_5waxb")
+surface_material_override/0 = SubResource("StandardMaterial3D_kdkoc")
+
+[node name="Stone_1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41991, 1.37265, -7.79687)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "stone"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stone_1"]
+mesh = SubResource("BoxMesh_qxlty")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 0, 0)
+shape = SubResource("BoxShape3D_dspdu")
+
+[node name="Stone_2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9904, 1.37265, -7.79687)
+mass = 6.0
+script = ExtResource("3_ctpq8")
+item_id = "stone"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stone_2"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("BoxMesh_qxlty")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_2"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.38419e-07, 0, 0)
+shape = SubResource("BoxShape3D_dspdu")
+
+[node name="Wood_1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2878, 2.73634, -11.2395)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_1"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Wood_2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.54015, 2.73634, -11.2395)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "wood"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wood_2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_or1u5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("CylinderShape3D_il0nj")

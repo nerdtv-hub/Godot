@@ -1,0 +1,342 @@
+[gd_scene load_steps=2 format=3 uid="uid://e2hipjrx4ooj"]
+
+[ext_resource type="Script" path="res://ui/InventoryPanel.gd" id="1_msqcc"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_msqcc")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
+
+[node name="Panel" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel2" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel3" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel4" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel5" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel6" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel7" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel8" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel9" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel9"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel9"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel10" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel10"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel10"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel11" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel11"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel11"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel12" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel12"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel12"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel13" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel13"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel13"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel14" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel14"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel14"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel15" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel15"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel15"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel16" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel16"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel16"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel17" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel17"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel17"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel18" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel18"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel18"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel19" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel19"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel19"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel20" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel20"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel20"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel21" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel21"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel21"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel22" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel22"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel22"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel23" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel23"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel23"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Panel24" type="Panel" parent="GridContainer"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="GridContainer/Panel24"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Count" type="Label" parent="GridContainer/Panel24"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

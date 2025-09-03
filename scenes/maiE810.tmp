@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0x3dbekkvcyu"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_1mx6e"]
+[ext_resource type="PackedScene" uid="uid://c4naigkk10ri6" path="res://scenes/Game/game_world.tscn" id="1_dgpkx"]
+[ext_resource type="PackedScene" uid="uid://bb11fp5xfhldp" path="res://ui/Hotbar.tscn" id="2_dx71t"]
+[ext_resource type="PackedScene" uid="uid://e2hipjrx4ooj" path="res://ui/InventoryPanel.tscn" id="3_shdxt"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_1mx6e")
+
+[node name="GameWorld" parent="." instance=ExtResource("1_dgpkx")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Inventar" parent="HUD/Control" instance=ExtResource("3_shdxt")]
+layout_mode = 1
+
+[node name="Hotbar" parent="HUD/Control" instance=ExtResource("2_dx71t")]
+layout_mode = 1
+offset_left = 556.0
+offset_top = 608.0
+offset_right = 556.0
+offset_bottom = 608.0
+
+[node name="Label" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -11.5
+offset_right = 31.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "HUD OK"
