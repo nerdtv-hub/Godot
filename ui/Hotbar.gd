@@ -44,8 +44,8 @@ func _update_all() -> void:
 			_print_slot_tree(slot)  # einmal zum Diagnostizieren
 			continue
 
+		var id: String = ids[i]
 		if i < ids.size():
-			var id: String = ids[i]
 			var info := ItemDB.get_info(id)
 			var amount := Inventory.count(id)
 			icon.texture = info.icon if info != null else null

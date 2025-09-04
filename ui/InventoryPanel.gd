@@ -2,13 +2,19 @@ extends Control
 @export var slot_count: int = 24
 var current_category: String = ""
 var sort_by_amount: bool = false
+var sort_button: Button
 
 func _ready() -> void:
 	visible = false
+	sort_button = find_child("SortButton") as Button
+	if sort_button == null:
+			sort_button = find_child("Sort qty") as Button
+
 	var grid := $GridContainer as GridContainer
 	for i in range(grid.get_child_count()):
-		_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
+			_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
 	Inventory.changed.connect(func(): if visible: _update_all())
+	visibility_changed.connect(_on_visibility_changed)
 	_update_all()
 
 func _process(_delta: float) -> void:
@@ -19,7 +25,14 @@ func _process(_delta: float) -> void:
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array[String] = Inventory.get_sorted_ids(current_category, sort_by_amount)
+	var ids: Array[String]
+	if sort_by_amount:
+		var items: Dictionary = Inventory.items.duplicate()
+		ids = items.keys()
+		ids.sort_custom(func(a: String, b: String) -> bool:
+					return items[b] < items[a])
+	else:
+		ids = Inventory.get_sorted_ids()
 
 	for i in range(grid.get_child_count()):
 		var slot := grid.get_child(i) as Control
@@ -102,3 +115,14 @@ func _create_filter_bar() -> void:
 				_update_all()
 		)
 		bar.add_child(sort_btn)
+		
+func _on_visibility_changed() -> void:
+		if not visible and sort_by_amount:
+				sort_by_amount = false
+				if sort_button:
+						sort_button.button_pressed = false
+				_update_all()
+
+func _on_sort_button_toggled(toggled_on: bool) -> void:
+		sort_by_amount = toggled_on
+		_update_all()
