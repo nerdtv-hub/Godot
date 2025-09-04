@@ -49,11 +49,7 @@ func _ready() -> void:
 	#interact_ray.enabled = true
 	# Eigenen Körper ignorieren (beides schadet nicht):
 	#interact_ray.exclude_parent = true
-	#interact_ray.add_exception(self)
-	
-	cone_mesh.top_radius = 0.0        # Spitze
-	cone_mesh.bottom_radius = reach_radius
-	cone_mesh.height = reach_distance
+	#interact_ray.add_exception(self)ce
 	reach_cast.shape = cone_mesh.create_convex_shape()
 	reach_cast.add_exception(self)
 	reach_cast.exclude_parent = true

@@ -41,7 +41,6 @@ func _update_all() -> void:
 			count = slot.get_node_or_null("count") as Label
 
 		if icon == null or count == null:
-			_print_slot_tree(slot)  # einmal zum Diagnostizieren
 			continue
 
 		var id: String = ids[i]
@@ -67,36 +66,8 @@ func _update_selection() -> void:
 		var slot := box.get_child(i) as Control
 		slot.modulate = Color(1, 1, 1, 1) if i == Inventory.hotbar_selected else Color(0.8, 0.8, 0.8, 1)
 
-func ensure_slot_layout(slot: Control) -> void:
-	slot.clip_contents = true
-	slot.custom_minimum_size = Vector2(64, 64)
 
-	var arc := slot.get_node_or_null("IconARC") as AspectRatioContainer
-	if arc == null:
-		arc = AspectRatioContainer.new()
-		arc.name = "IconARC"
-		arc.ratio = 1.0
-		arc.size_flags_horizontal = Control.SIZE_EXPAND
-		arc.size_flags_vertical = Control.SIZE_EXPAND
-		slot.add_child(arc)
 
-	var icon := slot.get_node_or_null("Icon") as TextureRect
-	if icon:
-		if icon.get_parent() != arc:
-			icon.get_parent().remove_child(icon)
-			arc.add_child(icon)
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.size_flags_horizontal = Control.SIZE_EXPAND
-		icon.size_flags_vertical = Control.SIZE_EXPAND
-
-	var count := slot.get_node_or_null("Count") as Label
-	if count:
-		count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
-
-func _print_slot_tree(root: Node) -> void:
-	print("Slot tree: ", root.name)
-	_print_tree_rec(root, 0)
 
 func _print_tree_rec(n: Node, depth: int) -> void:
 	var ind := ""

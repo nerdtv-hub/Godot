@@ -3,6 +3,7 @@ extends Control
 var current_category: String = ""
 var sort_by_amount: bool = false
 var sort_button: Button
+var category_buttons: Array[Button] = []
 
 func _ready() -> void:
 	visible = false
@@ -21,6 +22,16 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inventory_toggle"):
 		visible = not visible
 		if visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			_update_all()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			sort_by_amount = false
+			current_category = ""
+			for btn in category_buttons:
+					btn.button_pressed = false
+			if sort_button:
+					sort_button.button_pressed = false
 			_update_all()
 
 func _update_all() -> void:
@@ -89,32 +100,43 @@ func _create_filter_bar() -> void:
 		var bar := HBoxContainer.new()
 		bar.name = "FilterBar"
 		add_child(bar)
+		var group := ButtonGroup.new()
+		group.allow_unpress = true	
 
 		var all_btn := Button.new()
 		all_btn.text = "All"
-		all_btn.pressed.connect(func():
-				current_category = ""
+		all_btn.toggle_mode = true
+		all_btn.button_group = group
+		all_btn.toggled.connect(func(pressed: bool):
+				if pressed:
+						current_category = ""
+				elif current_category == "":
+						current_category = ""
 				_update_all()
 		)
 		bar.add_child(all_btn)
+		category_buttons.append(all_btn)
 
 		for cat in ItemDB.get_categories():
 				var btn := Button.new()
 				btn.text = cat.capitalize()
-				btn.pressed.connect(func(c := cat):
-					current_category = c
+				btn.toggle_mode = true
+				btn.button_group = group
+				btn.toggled.connect(func(pressed: bool, c := cat):
+					current_category = c if pressed else ""
 					_update_all()
 		)
 				bar.add_child(btn)
+				category_buttons.append(btn)
 
-		var sort_btn := Button.new()
-		sort_btn.text = "Sort qty"
-		sort_btn.toggle_mode = true
-		sort_btn.toggled.connect(func(pressed: bool):
+		sort_button = Button.new()
+		sort_button.text = "Menge"
+		sort_button.toggle_mode = true
+		sort_button.toggled.connect(func(pressed: bool):
 				sort_by_amount = pressed
 				_update_all()
 		)
-		bar.add_child(sort_btn)
+		bar.add_child(sort_button)
 		
 func _on_visibility_changed() -> void:
 		if not visible and sort_by_amount:
