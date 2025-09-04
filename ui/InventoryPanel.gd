@@ -32,14 +32,7 @@ func _process(_delta: float) -> void:
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount)
-	if current_category != "":
-			var filtered: Array[String] = []
-			for id in ids:
-					var info := ItemDB.get_info(id)
-					if info and info.category == current_category:
-							filtered.append(id)
-			ids = filtered
+	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount, current_category)
 
 	for slot in grid.get_children():
 				var icon := slot.get_node_or_null("Icon") as TextureRect
@@ -120,29 +113,32 @@ func _create_filter_bar(grid: GridContainer) -> void:
 		all_btn.text = "All"
 		all_btn.toggle_mode = true
 		all_btn.button_group = group
+		all_btn.mouse_filter = Control.MOUSE_FILTER_STOP
 		all_btn.toggled.connect(func(pressed: bool):
-				if pressed:
-					current_category = ""
-				_update_all()
+			if pressed:
+				current_category = ""
+			_update_all()
 		)
 		bar.add_child(all_btn)
 		category_buttons.append(all_btn)
 
 		for cat in ItemDB.get_categories():
-				var btn := Button.new()
-				btn.text = ("Food" if cat == "cooking" else cat.capitalize())
-				btn.text = cat.capitalize()
-				btn.toggle_mode = true
-				btn.button_group = group
-				btn.toggled.connect(func(pressed: bool, c := cat):
-					if pressed:
-							current_category = c
-					elif current_category == c:
-							current_category = ""
-					_update_all()
+			var btn := Button.new()
+			btn.text = ("Food" if cat == "cooking" else cat.capitalize())
+			btn.toggle_mode = true
+			btn.button_group = group
+			btn.mouse_filter = Control.MOUSE_FILTER_STOP
+			var category := cat
+			btn.toggled.connect(func(pressed: bool):
+				if pressed:
+						current_category = category
+				elif current_category == category:
+						current_category = ""
+				_update_all()
 		)
-				bar.add_child(btn)
-				category_buttons.append(btn)
+			bar.add_child(btn)
+			category_buttons.append(btn)
+
 
 		sort_button = Button.new()
 		sort_button.text = "Menge"
