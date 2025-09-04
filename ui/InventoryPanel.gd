@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array[String]
+	var ids: Array
 	if sort_by_amount:
 		var items: Dictionary = Inventory.items.duplicate()
 		ids = items.keys()
