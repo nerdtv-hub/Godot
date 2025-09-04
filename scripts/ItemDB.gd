@@ -2,7 +2,7 @@ extends Node
 
 const CATEGORY_TREE := {
 		"material": ["stone", "wood"],
-		"food": [],
+		"cooking": ["food"],
 		"special": [],
 		"tool": [],
 }

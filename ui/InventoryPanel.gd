@@ -32,38 +32,42 @@ func _process(_delta: float) -> void:
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array
-	if sort_by_amount:
-		var items: Dictionary = Inventory.items.duplicate()
-		ids = items.keys()
-		ids.sort_custom(func(a: String, b: String) -> bool:
-					return items[b] < items[a])
-	else:
-		ids = Inventory.get_sorted_ids()
-		
-	var slot_total := grid.get_child_count()
+	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount)
+	if current_category != "":
+			var filtered: Array[String] = []
+			for id in ids:
+					var info := ItemDB.get_info(id)
+					if info and info.category == current_category:
+							filtered.append(id)
+			ids = filtered
 
-	for i in range(slot_total):
-		var slot := grid.get_child(i) as Control
+	for slot in grid.get_children():
+				var icon := slot.get_node_or_null("Icon") as TextureRect
+				if icon == null:
+						var arc := slot.get_node_or_null("IconARC") as AspectRatioContainer
+						if arc:
+								icon = arc.get_node_or_null("Icon") as TextureRect
+				var count := slot.get_node_or_null("Count") as Label
+				if icon:
+						icon.texture = null
+				if count:
+						count.text = ""
 
-		var icon := slot.get_node_or_null("Icon") as TextureRect
-		if icon == null:
-			var arc := slot.get_node_or_null("IconARC") as AspectRatioContainer
-			if arc:
-				icon = arc.get_node_or_null("Icon") as TextureRect
-
-		var count := slot.get_node_or_null("Count") as Label
-		if icon == null or count == null:
-			continue
-		
-		var id: String = ids[i] if i < ids.size() else ""
-		if i < ids.size():
-			var info: ItemDB.ItemInfo = ItemDB.get_info(id)
-			icon.texture = info.icon if info != null else null
-			count.text = str(Inventory.count(id))
-		else:
-			icon.texture = null
-			count.text = ""
+	var limit: int = min(ids.size(), grid.get_child_count())
+	for i in range(limit):
+				var slot := grid.get_child(i) as Control
+				var icon := slot.get_node_or_null("Icon") as TextureRect
+				if icon == null:
+						var arc := slot.get_node_or_null("IconARC") as AspectRatioContainer
+						if arc:
+								icon = arc.get_node_or_null("Icon") as TextureRect
+				var count := slot.get_node_or_null("Count") as Label
+				var id: String = ids[i]
+				var info: ItemDB.ItemInfo = ItemDB.get_info(id)
+				if icon:
+						icon.texture = info.icon if info else null
+				if count:
+						count.text = str(Inventory.count(id)) if info else ""
 
 func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
 	slot.clip_contents = true
@@ -118,9 +122,7 @@ func _create_filter_bar(grid: GridContainer) -> void:
 		all_btn.button_group = group
 		all_btn.toggled.connect(func(pressed: bool):
 				if pressed:
-						current_category = ""
-				elif current_category == "":
-						current_category = ""
+					current_category = ""
 				_update_all()
 		)
 		bar.add_child(all_btn)
@@ -128,11 +130,15 @@ func _create_filter_bar(grid: GridContainer) -> void:
 
 		for cat in ItemDB.get_categories():
 				var btn := Button.new()
+				btn.text = ("Food" if cat == "cooking" else cat.capitalize())
 				btn.text = cat.capitalize()
 				btn.toggle_mode = true
 				btn.button_group = group
 				btn.toggled.connect(func(pressed: bool, c := cat):
-					current_category = c if pressed else ""
+					if pressed:
+							current_category = c
+					elif current_category == c:
+							current_category = ""
 					_update_all()
 		)
 				bar.add_child(btn)
