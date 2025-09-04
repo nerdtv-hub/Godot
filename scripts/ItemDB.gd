@@ -28,6 +28,13 @@ var data: Dictionary = {
 		CylinderMesh.new(),
 		CylinderShape3D.new()
 	),
+	"food": ItemInfo.new(
+		"food",
+		"Food",
+		"res://ui/icons/food.png",
+		PrismMesh.new(),
+		BoxShape3D.new()
+	),
 	}
 
 func get_info(id: String) -> ItemInfo:

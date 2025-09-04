@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4naigkk10ri6"]
+[gd_scene load_steps=18 format=3 uid="uid://c4naigkk10ri6"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yo1nn"]
 [ext_resource type="Texture2D" uid="uid://bbv7rd80vdo7t" path="res://assets/grid_texture.png" id="2_ejvxo"]
@@ -11,7 +11,7 @@
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cemht"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_503d7"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_g6xpi"]
 top_radius = 0.0
 bottom_radius = 0.35
 height = 1.25
@@ -34,6 +34,10 @@ uv1_scale = Vector3(55, 55, 55)
 [sub_resource type="CylinderMesh" id="CylinderMesh_or1u5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_il0nj"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ls1ci"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnniw"]
 
 [node name="GameWorld" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59503, 3.39217, -0.378142)
@@ -81,7 +85,7 @@ debug_shape_custom_color = Color(0.828542, 0, 0.477452, 1)
 [node name="ReachCone" type="MeshInstance3D" parent="Player/Head/ReachCast"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.625)
 visible = false
-mesh = SubResource("CylinderMesh_503d7")
+mesh = SubResource("CylinderMesh_g6xpi")
 script = ExtResource("2_vmowd")
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -286,3 +290,18 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wood_8"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
 shape = SubResource("CylinderShape3D_il0nj")
+
+[node name="Food" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 8.88127, 4.2395, 0.410938)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "food"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Food"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("PrismMesh_ls1ci")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Food"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77636e-15, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_fnniw")
