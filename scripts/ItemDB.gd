@@ -1,17 +1,28 @@
 extends Node
 
+const CATEGORY_TREE := {
+		"material": ["stone", "wood"],
+		"food": [],
+		"special": [],
+		"tool": [],
+}
+
 class ItemInfo:
 	var id: String
 	var name: String
 	var icon: Texture2D
 	var mesh: Mesh
 	var shape: Shape3D
-	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D) -> void:
+	var category: String
+	var subcategory: String
+	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D, _category: String, _subcategory: String = "") -> void:
 			id = _id
 			name = _name
 			icon = load(_icon_path) as Texture2D
 			mesh = _mesh
 			shape = _shape
+			category = _category
+			subcategory = _subcategory
 
 var data: Dictionary = {
 	"stone": ItemInfo.new(
@@ -19,26 +30,50 @@ var data: Dictionary = {
 		"Stone",
 		"res://ui/icons/stone.png",
 		BoxMesh.new(),
-		BoxShape3D.new()
+		BoxShape3D.new(),
+		"material",
+		"stone"
 	),
 	"wood": ItemInfo.new(
 		"wood",
 		"Wood",
 		"res://ui/icons/wood.png",
 		CylinderMesh.new(),
-		CylinderShape3D.new()
+		CylinderShape3D.new(),
+		"material",
+		"wood"
 	),
 	"food": ItemInfo.new(
 		"food",
 		"Food",
 		"res://ui/icons/food.png",
 		PrismMesh.new(),
-		BoxShape3D.new()
+		BoxShape3D.new(),
+		"cooking",
+		"food"
 	),
 	}
+	
+func get_categories() -> Array[String]:
+	return CATEGORY_TREE.keys()
+
+func get_subcategories(cat: String) -> Array[String]:
+	return CATEGORY_TREE.get(cat, [])
+
 
 func get_info(id: String) -> ItemInfo:
 	return data.get(id, null)
+	
+func get_items_in_category(category: String, subcategory: String = "") -> Array[ItemInfo]:
+		var result: Array[ItemInfo] = []
+		for info in data.values():
+				if info.category != category:
+						continue
+				if subcategory != "" and info.subcategory != subcategory:
+						continue
+				result.append(info)
+		return result
+
 
 func create_pickup(id: String) -> RigidBody3D:
 	var info := get_info(id)

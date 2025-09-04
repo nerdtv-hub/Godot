@@ -29,11 +29,16 @@ func set_hotbar_selected(i: int) -> void:
 func count(id: String) -> int:
 	return int(items.get(id, 0))
 
-func get_sorted_ids() -> Array[String]:
+func get_sorted_ids(category: String = "", sort_by_amount: bool = false) -> Array[String]:
 	var ids: Array[String] = []
 	for k in items.keys():
-		ids.append(String(k))
-	ids.sort()
+		var info := ItemDB.get_info(String(k))
+		if category == "" or (info != null and info.category == category):
+			ids.append(String(k))
+	if sort_by_amount:
+			ids.sort_custom(func(a, b): return items[b] < items[a])
+	else:
+			ids.sort()
 	return ids
 
 func get_hotbar_ids() -> Array[String]:

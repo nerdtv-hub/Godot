@@ -1,5 +1,7 @@
 extends Control
 @export var slot_count: int = 24
+var current_category: String = ""
+var sort_by_amount: bool = false
 
 func _ready() -> void:
 	visible = false
@@ -17,7 +19,7 @@ func _process(_delta: float) -> void:
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array[String] = Inventory.get_sorted_ids()
+	var ids: Array[String] = Inventory.get_sorted_ids(current_category, sort_by_amount)
 
 	for i in range(grid.get_child_count()):
 		var slot := grid.get_child(i) as Control
@@ -69,3 +71,34 @@ func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
 		count.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		count.text = ""
+		
+func _create_filter_bar() -> void:
+		var bar := HBoxContainer.new()
+		bar.name = "FilterBar"
+		add_child(bar)
+
+		var all_btn := Button.new()
+		all_btn.text = "All"
+		all_btn.pressed.connect(func():
+				current_category = ""
+				_update_all()
+		)
+		bar.add_child(all_btn)
+
+		for cat in ItemDB.get_categories():
+				var btn := Button.new()
+				btn.text = cat.capitalize()
+				btn.pressed.connect(func(c := cat):
+					current_category = c
+					_update_all()
+		)
+				bar.add_child(btn)
+
+		var sort_btn := Button.new()
+		sort_btn.text = "Sort qty"
+		sort_btn.toggle_mode = true
+		sort_btn.toggled.connect(func(pressed: bool):
+				sort_by_amount = pressed
+				_update_all()
+		)
+		bar.add_child(sort_btn)
