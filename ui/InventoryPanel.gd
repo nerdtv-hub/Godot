@@ -40,8 +40,10 @@ func _update_all() -> void:
 					return items[b] < items[a])
 	else:
 		ids = Inventory.get_sorted_ids()
+		
+	var slot_total := grid.get_child_count()
 
-	for i in range(grid.get_child_count()):
+	for i in range(slot_total):
 		var slot := grid.get_child(i) as Control
 
 		var icon := slot.get_node_or_null("Icon") as TextureRect
@@ -53,9 +55,9 @@ func _update_all() -> void:
 		var count := slot.get_node_or_null("Count") as Label
 		if icon == null or count == null:
 			continue
-
+		
+		var id: String = ids[i] if i < ids.size() else ""
 		if i < ids.size():
-			var id: String = ids[i]
 			var info: ItemDB.ItemInfo = ItemDB.get_info(id)
 			icon.texture = info.icon if info != null else null
 			count.text = str(Inventory.count(id))
