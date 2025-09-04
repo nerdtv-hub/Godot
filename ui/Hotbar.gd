@@ -45,7 +45,7 @@ func _update_all() -> void:
 
 		var id: String = ids[i]
 		if i < ids.size():
-			var info := ItemDB.get_info(id)
+			var info: ItemDB.ItemInfo = ItemDB.get_info(id)
 			var amount := Inventory.count(id)
 			icon.texture = info.icon if info != null else null
 			icon.visible = amount > 0

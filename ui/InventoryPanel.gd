@@ -7,15 +7,11 @@ var category_buttons: Array[Button] = []
 
 func _ready() -> void:
 	visible = false
-	sort_button = find_child("SortButton") as Button
-	if sort_button == null:
-			sort_button = find_child("Sort qty") as Button
-
 	var grid := $GridContainer as GridContainer
+	_create_filter_bar(grid)
 	for i in range(grid.get_child_count()):
 			_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
 	Inventory.changed.connect(func(): if visible: _update_all())
-	visibility_changed.connect(_on_visibility_changed)
 	_update_all()
 
 func _process(_delta: float) -> void:
@@ -60,7 +56,7 @@ func _update_all() -> void:
 
 		if i < ids.size():
 			var id: String = ids[i]
-			var info: Variant = ItemDB.get_info(id)
+			var info: ItemDB.ItemInfo = ItemDB.get_info(id)
 			icon.texture = info.icon if info != null else null
 			count.text = str(Inventory.count(id))
 		else:
@@ -96,9 +92,20 @@ func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
 		count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		count.text = ""
 		
-func _create_filter_bar() -> void:
+func _create_filter_bar(grid: GridContainer) -> void:
 		var bar := HBoxContainer.new()
 		bar.name = "FilterBar"
+		bar.anchor_left = 0.5
+		bar.anchor_right = 0.5
+		bar.anchor_top = 0.5
+		bar.anchor_bottom = 0.5
+		bar.offset_left = grid.offset_left
+		bar.offset_right = grid.offset_right
+		var height := 24
+		bar.offset_top = grid.offset_top - height - 4
+		bar.offset_bottom = grid.offset_top - 4
+		bar.custom_minimum_size.y = height
+		bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		add_child(bar)
 		var group := ButtonGroup.new()
 		group.allow_unpress = true	

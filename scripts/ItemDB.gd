@@ -55,10 +55,16 @@ var data: Dictionary = {
 	}
 	
 func get_categories() -> Array[String]:
-	return CATEGORY_TREE.keys()
+		var cats: Array[String] = []
+		for c in CATEGORY_TREE.keys():
+				cats.append(String(c))
+		return cats
 
 func get_subcategories(cat: String) -> Array[String]:
-	return CATEGORY_TREE.get(cat, [])
+		var subs: Array[String] = []
+		for s in CATEGORY_TREE.get(cat, []):
+				subs.append(String(s))
+		return subs
 
 
 func get_info(id: String) -> ItemInfo:
@@ -76,7 +82,7 @@ func get_items_in_category(category: String, subcategory: String = "") -> Array[
 
 
 func create_pickup(id: String) -> RigidBody3D:
-	var info := get_info(id)
+	var info: ItemInfo = get_info(id)
 	if info == null:
 		return null
 	var drop := RigidBody3D.new()
