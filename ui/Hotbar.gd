@@ -31,20 +31,21 @@ func _on_selected_changed(_i: int) -> void:
 func _update_all() -> void:
 	var box := $HBoxContainer as HBoxContainer
 	var ids: Array[String] = Inventory.get_hotbar_ids()
+	ids.resize(box.get_child_count())
 	for i in range(box.get_child_count()):
 		var slot := box.get_child(i) as Node
 		var icon := slot.get_node_or_null("Icon") as TextureRect
 		if icon == null:
-			icon = slot.get_node_or_null("icon") as TextureRect
+				icon = slot.get_node_or_null("icon") as TextureRect
 		var count := slot.get_node_or_null("Count") as Label
 		if count == null:
-			count = slot.get_node_or_null("count") as Label
-
+				count = slot.get_node_or_null("count") as Label
+				
 		if icon == null or count == null:
 			continue
 
 		var id: String = ids[i]
-		if i < ids.size():
+		if id != "":
 			var info: ItemDB.ItemInfo = ItemDB.get_info(id)
 			var amount := Inventory.count(id)
 			icon.texture = info.icon if info != null else null
@@ -57,7 +58,6 @@ func _update_all() -> void:
 			count.text = ""
 			count.visible = false
 	_update_selection()
-
 func _update_selection() -> void:
 	var box := get_node("HBoxContainer") as HBoxContainer
 	

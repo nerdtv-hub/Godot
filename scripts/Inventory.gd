@@ -66,7 +66,7 @@ func get_sorted_ids(sort_by_amount: bool = false) -> Array[String]:
 func get_hotbar_ids() -> Array[String]:
 	var ids: Array[String] = get_sorted_ids()
 	var result: Array[String] = []
-	var limit := min(ids.size(), HOTBAR_SIZE)
+	var limit: int = min(ids.size(), HOTBAR_SIZE)
 	for i in range(limit):
 			result.append(ids[i])
 	return result
