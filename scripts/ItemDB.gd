@@ -56,7 +56,7 @@ var data: Dictionary = {
 		"Cake",
 		"res://ui/icons/cake.png",
 		TorusMesh.new(),
-		BoxShape3D.new(),
+		CylinderShape3D.new(),
 		"cooking",
 		"food"
 	),
@@ -90,16 +90,16 @@ func get_items_in_category(category: String, subcategory: String = "") -> Array[
 
 
 func create_pickup(id: String) -> RigidBody3D:
-	var info: ItemInfo = get_info(id)
-	if info == null:
-		return null
-	var drop := RigidBody3D.new()
-	drop.set_script(load("res://scripts/ItemPickup.gd"))
-	drop.item_id = id
-	var mesh_instance := MeshInstance3D.new()
-	mesh_instance.mesh = info.mesh.duplicate()
-	drop.add_child(mesh_instance)
-	var coll := CollisionShape3D.new()
-	coll.shape = info.shape.duplicate()
-	drop.add_child(coll)
-	return drop
+		var info: ItemInfo = get_info(id)
+		if info == null:
+				return null
+		var drop := RigidBody3D.new()
+		drop.set_script(load("res://scripts/ItemPickup.gd"))
+		drop.item_id = id
+		var mesh_instance := MeshInstance3D.new()
+		mesh_instance.mesh = info.mesh
+		drop.add_child(mesh_instance)
+		var coll := CollisionShape3D.new()
+		coll.shape = info.shape
+		drop.add_child(coll)
+		return drop

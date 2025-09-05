@@ -48,8 +48,10 @@ func _update_all() -> void:
 				var count := slot.get_node_or_null("Count") as Label
 				if icon:
 						icon.texture = null
+						icon.visible = false
 				if count:
 						count.text = ""
+						count.visible = false
 
 	var limit: int = min(ids.size(), grid.get_child_count())
 	for i in range(limit):
@@ -63,9 +65,13 @@ func _update_all() -> void:
 				var id: String = ids[i]
 				var info: ItemDB.ItemInfo = ItemDB.get_info(id)
 				if icon:
+						var amount := Inventory.count(id)
 						icon.texture = info.icon if info else null
+						icon.visible = amount > 0 and info != null
 				if count:
-						count.text = str(Inventory.count(id)) if info else ""
+						var amount := Inventory.count(id)
+						count.text = str(amount) if info and amount > 0 else ""
+						count.visible = info != null and amount > 0
 
 func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
 	slot.clip_contents = true
