@@ -66,9 +66,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		)
 		camera_pivot.rotation.x = pitch_rad
 	elif event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
-		Input.set_mouse_mode(
-			Input.MOUSE_MODE_VISIBLE if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
-		)
+				Input.set_mouse_mode(
+						Input.MOUSE_MODE_VISIBLE if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
+				)
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE and get_viewport().gui_get_focus_owner() == null:
+						Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		# Fange die Maus nur dann wieder ein, wenn kein UI-Element den Klick verarbeitet hat.
 
 
 

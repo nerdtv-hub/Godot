@@ -58,7 +58,7 @@ func _sort_by_amount(a: String, b: String) -> bool:
 		return int(items.get(a, 0)) > int(items.get(b, 0))
 
 func get_sorted_ids(sort_by_amount: bool = false, category: String = "") -> Array[String]:
-	var ids: Array[String] = item_order.duplicate()
+	var ids: Array[String] = item_order.duplicate() as Array[String]
 	if sort_by_amount:
 					ids.sort_custom(_sort_by_amount)
 	if category != "":
