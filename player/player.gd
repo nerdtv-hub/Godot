@@ -37,19 +37,19 @@ var cone_local := Transform3D(
 
 
 func _ready() -> void:
-	var floor := $"../Floor" #Pfad zum Boden
+	var floor_node := $"../Floor" #Pfad zum Boden
 	var cone_mesh := CylinderMesh.new()
 	cone_mesh.top_radius    = 0.0             # Spitze
 	cone_mesh.bottom_radius = reach_radius
 	cone_mesh.height        = reach_distance
 	reach_cone.mesh = cone_mesh
-	#interact_ray.add_exception(floor)
-	reach_cast.add_exception(floor)
+	#interact_ray.add_exception(floor_node)
+	reach_cast.add_exception(floor_node)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#interact_ray.enabled = true
 	# Eigenen Körper ignorieren (beides schadet nicht):
 	#interact_ray.exclude_parent = true
-	#interact_ray.add_exception(self)ce
+	#interact_ray.add_exception(self)
 	reach_cast.shape = cone_mesh.create_convex_shape()
 	reach_cast.add_exception(self)
 	reach_cast.exclude_parent = true
@@ -77,9 +77,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	var basis  := camera_pivot.global_transform.basis
+	var pivot_basis  := camera_pivot.global_transform.basis
 	var origin := head.global_transform.origin
-	reach_cast.global_transform = Transform3D(basis, origin) * cone_local
+	reach_cast.global_transform = Transform3D(pivot_basis, origin) * cone_local
 	reach_cast.target_position  = Vector3.ZERO
 	reach_cone.global_transform = reach_cast.global_transform
 

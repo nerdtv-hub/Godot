@@ -19,7 +19,7 @@ func set_hotbar_slot(index: int, id: String) -> void:
 		if id != "" and not items.has(id):
 			return
 		hotbar_slots[index] = id
-		emit_signal("changed")
+		changed.emit()
 
 func add_item(id: String, amount: int = 1) -> void:
 		if not hotbar_slots.has(id):
@@ -30,7 +30,7 @@ func add_item(id: String, amount: int = 1) -> void:
 		items[id] = int(items.get(id, 0)) + amount
 		if is_new and items[id] > 0:
 				item_order.append(id)
-		emit_signal("changed")
+		changed.emit()
 	
 	
 func remove_item(id: String, amount: int = 1) -> void:
@@ -45,11 +45,11 @@ func remove_item(id: String, amount: int = 1) -> void:
 		for i in range(HOTBAR_SIZE):
 			if hotbar_slots[i] == id:
 				hotbar_slots[i] = ""
-	emit_signal("changed")
+	changed.emit()
 	
 func set_hotbar_selected(i: int) -> void:
 	hotbar_selected = clamp(i, 0, HOTBAR_SIZE - 1)
-	emit_signal("hotbar_selected_changed", hotbar_selected)
+	hotbar_selected_changed.emit(hotbar_selected)
 
 func count(id: String) -> int:
 	return int(items.get(id, 0))

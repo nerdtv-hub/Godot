@@ -4,6 +4,7 @@ var current_category: String = ""
 var sort_by_amount: bool = false
 var sort_button: Button
 var category_buttons: Array[Button] = []
+@onready var hotbar: Control = get_parent().get_node_or_null("Hotbar")
 
 func _ready() -> void:
 	visible = false
@@ -16,23 +17,27 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("inventory_toggle"):
-		visible = not visible
-		if visible:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			_update_all()
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			sort_by_amount = false
-			current_category = ""
-			for btn in category_buttons:
-					btn.button_pressed = false
-			if sort_button:
-					sort_button.button_pressed = false
-			_update_all()
+			visible = not visible
+			if visible:
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+					if hotbar:
+							hotbar.visible = false
+					_update_all()
+			else:
+					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+					sort_by_amount = false
+					current_category = ""
+					for btn in category_buttons:
+									btn.button_pressed = false
+					if sort_button:
+									sort_button.button_pressed = false
+					if hotbar:
+							hotbar.visible = true
+					_update_all()
 
 func _update_all() -> void:
 	var grid := $GridContainer as GridContainer
-	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount, current_category)
+	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount, current_category) as Array[String]
 
 	for slot in grid.get_children():
 				var icon := slot.get_node_or_null("Icon") as TextureRect

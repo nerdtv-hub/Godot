@@ -17,6 +17,6 @@ func _ready() -> void:
 	print("HUD added:", hotbar, inventory_panel)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+		pass
