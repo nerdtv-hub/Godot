@@ -1,8 +1,8 @@
 extends Node
 
 const CATEGORY_TREE := {
-		"material": ["stone", "wood"],
-		"cooking": ["food"],
+		"material": [],
+		"cooking": ["food", "zutaten"],
 		"special": [],
 		"tool": [],
 }
@@ -32,7 +32,6 @@ var data: Dictionary = {
 		BoxMesh.new(),
 		BoxShape3D.new(),
 		"material",
-		"stone"
 	),
 	"wood": ItemInfo.new(
 		"wood",
@@ -41,13 +40,22 @@ var data: Dictionary = {
 		CylinderMesh.new(),
 		CylinderShape3D.new(),
 		"material",
-		"wood"
 	),
-	"food": ItemInfo.new(
-		"food",
-		"Food",
-		"res://ui/icons/food.png",
+	"fish": ItemInfo.new(
+		"fish",
+		"Fish",
+		"res://ui/icons/fish.png",
 		PrismMesh.new(),
+		BoxShape3D.new(),
+		"cooking",
+		"food"
+	),
+	
+	"cake": ItemInfo.new(
+		"cake",
+		"Cake",
+		"res://ui/icons/cake.png",
+		TorusMesh.new(),
 		BoxShape3D.new(),
 		"cooking",
 		"food"

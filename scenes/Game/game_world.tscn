@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4naigkk10ri6"]
+[gd_scene load_steps=20 format=3 uid="uid://c4naigkk10ri6"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yo1nn"]
 [ext_resource type="Texture2D" uid="uid://bbv7rd80vdo7t" path="res://assets/grid_texture.png" id="2_ejvxo"]
@@ -23,7 +23,7 @@ size = Vector3(250, 1, 250)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdkoc"]
 shading_mode = 0
-albedo_color = Color(0.235294, 0.607843, 1, 1)
+albedo_color = Color(0.773144, 0.516035, 0.566644, 1)
 albedo_texture = ExtResource("2_ejvxo")
 uv1_scale = Vector3(55, 55, 55)
 
@@ -38,6 +38,10 @@ uv1_scale = Vector3(55, 55, 55)
 [sub_resource type="PrismMesh" id="PrismMesh_ls1ci"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnniw"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_ai0to"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kb0wj"]
 
 [node name="GameWorld" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59503, 3.39217, -0.378142)
@@ -291,17 +295,118 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
 shape = SubResource("CylinderShape3D_il0nj")
 
-[node name="Food" type="RigidBody3D" parent="."]
+[node name="Fish_1" type="RigidBody3D" parent="."]
 transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 8.88127, 4.2395, 0.410938)
 mass = 4.0
 script = ExtResource("3_ctpq8")
-item_id = "food"
+item_id = "fish"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Food"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fish_1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
 mesh = SubResource("PrismMesh_ls1ci")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Food"]
+[node name="_" type="CollisionShape3D" parent="Fish_1"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77636e-15, 0, 1, 0, -1.5, 0)
 shape = SubResource("BoxShape3D_fnniw")
+
+[node name="Fish_2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 10.9631, 4.2395, 0.410938)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "fish"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fish_2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("PrismMesh_ls1ci")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fish_2"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77636e-15, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_fnniw")
+
+[node name="Fish_3" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 9.59725, 4.2395, 1.52662)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "fish"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fish_3"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("PrismMesh_ls1ci")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fish_3"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77636e-15, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_fnniw")
+
+[node name="Fish_4" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, 10.541, 4.2395, 2.43684)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "fish"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fish_4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("PrismMesh_ls1ci")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fish_4"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77636e-15, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_fnniw")
+
+[node name="Cake_1" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, -5.79182, 4.2395, -0.741801)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "food"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cake_1"]
+mesh = SubResource("TorusMesh_ai0to")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cake_1"]
+transform = Transform3D(2, 0, 1.07945e-07, 0, 0.25, 0, -1.07945e-07, 0, 2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_kb0wj")
+
+[node name="Cake_2" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, -4.08327, 4.2395, 1.53166)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "food"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cake_2"]
+mesh = SubResource("TorusMesh_ai0to")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cake_2"]
+transform = Transform3D(2, 0, 1.07945e-07, 0, 0.25, 0, -1.07945e-07, 0, 2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_kb0wj")
+
+[node name="Cake_3" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, -2.65116, 4.2395, -0.741801)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "food"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cake_3"]
+mesh = SubResource("TorusMesh_ai0to")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cake_3"]
+transform = Transform3D(2, 0, 1.07945e-07, 0, 0.25, 0, -1.07945e-07, 0, 2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_kb0wj")
+
+[node name="Cake_4" type="RigidBody3D" parent="."]
+transform = Transform3D(0.541576, 0, -0.840652, 0, 1, 0, 0.840652, 0, 0.541576, -3.67386, 5.77738, -0.0442109)
+mass = 4.0
+script = ExtResource("3_ctpq8")
+item_id = "food"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cake_4"]
+mesh = SubResource("TorusMesh_ai0to")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cake_4"]
+transform = Transform3D(2, 0, 1.07945e-07, 0, 0.25, 0, -1.07945e-07, 0, 2, 0, 0, 0)
+shape = SubResource("CylinderShape3D_kb0wj")

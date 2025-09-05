@@ -57,7 +57,7 @@ func count(id: String) -> int:
 func _sort_by_amount(a: String, b: String) -> bool:
 		return int(items.get(a, 0)) > int(items.get(b, 0))
 
-func get_sorted_ids(sort_by_amount: bool = false, category: String = "") -> Array[String]:
+func get_sorted_ids(sort_by_amount: bool = false, category: String = "", subcategory: String = "") -> Array[String]:
 	var ids: Array[String] = item_order.duplicate() as Array[String]
 	if sort_by_amount:
 					ids.sort_custom(_sort_by_amount)
@@ -65,7 +65,7 @@ func get_sorted_ids(sort_by_amount: bool = false, category: String = "") -> Arra
 		var filtered: Array[String] = []
 		for id in ids:
 			var info := ItemDB.get_info(id)
-			if info and info.category == category:
+			if info and info.category == category and (subcategory == "" or info.subcategory == subcategory):
 							filtered.append(id)
 		ids = filtered
 	return ids
