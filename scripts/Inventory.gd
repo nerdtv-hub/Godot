@@ -54,21 +54,27 @@ func set_hotbar_selected(i: int) -> void:
 func count(id: String) -> int:
 	return int(items.get(id, 0))
 
-func _sort_by_amount(a: String, b: String) -> bool:
+func _sort_by_amount_desc(a: String, b: String) -> bool:
 		return int(items.get(a, 0)) > int(items.get(b, 0))
 
-func get_sorted_ids(sort_by_amount: bool = false, category: String = "", subcategory: String = "") -> Array[String]:
-	var ids: Array[String] = item_order.duplicate() as Array[String]
-	if sort_by_amount:
-					ids.sort_custom(_sort_by_amount)
-	if category != "":
-		var filtered: Array[String] = []
-		for id in ids:
-			var info := ItemDB.get_info(id)
-			if info and info.category == category and (subcategory == "" or info.subcategory == subcategory):
-							filtered.append(id)
-		ids = filtered
-	return ids
+func _sort_by_amount_asc(a: String, b: String) -> bool:
+		return int(items.get(a, 0)) < int(items.get(b, 0))
+
+func get_sorted_ids(sort_order: int = 0, category: String = "", subcategory: String = "") -> Array[String]:
+				var ids: Array[String] = item_order.duplicate() as Array[String]
+				if sort_order != 0:
+								if sort_order > 0:
+												ids.sort_custom(_sort_by_amount_desc)
+								else:
+												ids.sort_custom(_sort_by_amount_asc)
+				if category != "":
+					var filtered: Array[String] = []
+					for id in ids:
+						var info := ItemDB.get_info(id)
+						if info and info.category == category and (subcategory == "" or info.subcategory == subcategory):
+										filtered.append(id)
+					ids = filtered
+				return ids
 
 func get_hotbar_ids() -> Array[String]:
 	return hotbar_slots.duplicate() as Array[String]

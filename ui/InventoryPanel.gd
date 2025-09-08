@@ -1,17 +1,31 @@
 extends Control
 @export var slot_count: int = 24
 var current_category: String = ""
-var sort_by_amount: bool = false
+var sort_order: int = 0
 var sort_button: Button
 var category_buttons: Array[Button] = []
 @onready var hotbar: Control = get_parent().get_node_or_null("Hotbar")
+@onready var grid: GridContainer = $GridContainer
 
 func _ready() -> void:
 	visible = false
-	var grid := $GridContainer as GridContainer
-	_create_filter_bar(grid)
+	var bar: HBoxContainer = _create_filter_bar()
+	var layout := VBoxContainer.new()
+	layout.anchor_left = grid.anchor_left
+	layout.anchor_right = grid.anchor_right
+	layout.anchor_top = grid.anchor_top
+	layout.anchor_bottom = grid.anchor_bottom
+	layout.offset_left = grid.offset_left
+	layout.offset_right = grid.offset_right
+	var spacing := bar.custom_minimum_size.y + 4
+	layout.offset_top = grid.offset_top - spacing / 2
+	layout.offset_bottom = grid.offset_bottom + spacing / 2
+	add_child(layout)
+	remove_child(grid)
+	layout.add_child(bar)
+	layout.add_child(grid)
 	for i in range(grid.get_child_count()):
-			_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
+		_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
 	Inventory.changed.connect(func(): if visible: _update_all())
 	_update_all()
 
@@ -25,7 +39,7 @@ func _process(_delta: float) -> void:
 					_update_all()
 			else:
 					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-					sort_by_amount = false
+					sort_order = false
 					current_category = ""
 					for btn in category_buttons:
 									btn.button_pressed = false
@@ -36,8 +50,7 @@ func _process(_delta: float) -> void:
 					_update_all()
 
 func _update_all() -> void:
-	var grid := $GridContainer as GridContainer
-	var ids: Array[String] = Inventory.get_sorted_ids(sort_by_amount, current_category) as Array[String]
+	var ids: Array[String] = Inventory.get_sorted_ids(sort_order, current_category)
 
 	for slot in grid.get_children():
 				var icon := slot.get_node_or_null("Icon") as TextureRect
@@ -102,23 +115,13 @@ func _prepare_inventory_slot(slot: Control, min_size: Vector2) -> void:
 		count.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		count.text = ""
 		
-func _create_filter_bar(grid: GridContainer) -> void:
+func _create_filter_bar() -> HBoxContainer:
 		var bar := HBoxContainer.new()
 		bar.name = "FilterBar"
-		bar.anchor_left = 0.5
-		bar.anchor_right = 0.5
-		bar.anchor_top = 0.5
-		bar.anchor_bottom = 0.5
-		bar.offset_left = grid.offset_left
-		bar.offset_right = grid.offset_right
-		var height := 24
-		bar.offset_top = grid.offset_top - height - 4
-		bar.offset_bottom = grid.offset_top - 4
-		bar.custom_minimum_size.y = height
-		bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		add_child(bar)
+		bar.custom_minimum_size.y = 24
+		bar.size_flags_horizontal = Control.SIZE_FILL
 		var group := ButtonGroup.new()
-		group.allow_unpress = true	
+		group.allow_unpress = true
 
 		var all_btn := Button.new()
 		all_btn.text = "All"
@@ -128,6 +131,7 @@ func _create_filter_bar(grid: GridContainer) -> void:
 		all_btn.toggled.connect(func(pressed: bool):
 			if pressed:
 				current_category = ""
+				sort_order = 0
 			_update_all()
 		)
 		bar.add_child(all_btn)
@@ -149,24 +153,18 @@ func _create_filter_bar(grid: GridContainer) -> void:
 		)
 			bar.add_child(btn)
 			category_buttons.append(btn)
-
-
 		sort_button = Button.new()
 		sort_button.text = "Menge"
-		sort_button.toggle_mode = true
-		sort_button.toggled.connect(func(pressed: bool):
-				sort_by_amount = pressed
-				_update_all()
-		)
+		sort_button.mouse_filter = Control.MOUSE_FILTER_STOP
+		sort_button.pressed.connect(_on_sort_button_pressed)
 		bar.add_child(sort_button)
-		
-func _on_visibility_changed() -> void:
-		if not visible and sort_by_amount:
-				sort_by_amount = false
-				if sort_button:
-						sort_button.button_pressed = false
-				_update_all()
-
-func _on_sort_button_toggled(toggled_on: bool) -> void:
-		sort_by_amount = toggled_on
-		_update_all()
+		return bar
+			
+func _on_sort_button_pressed() -> void:
+	if sort_order == 0:
+					sort_order = 1
+	elif sort_order == 1:
+					sort_order = -1
+	else:
+					sort_order = 1
+	_update_all()
