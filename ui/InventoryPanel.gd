@@ -11,19 +11,26 @@ func _ready() -> void:
 	visible = false
 	var bar: HBoxContainer = _create_filter_bar()
 	var layout := VBoxContainer.new()
-	layout.anchor_left = grid.anchor_left
-	layout.anchor_right = grid.anchor_right
-	layout.anchor_top = grid.anchor_top
-	layout.anchor_bottom = grid.anchor_bottom
-	layout.offset_left = grid.offset_left
-	layout.offset_right = grid.offset_right
-	var spacing := bar.custom_minimum_size.y + 4
-	layout.offset_top = grid.offset_top - spacing / 2
-	layout.offset_bottom = grid.offset_bottom + spacing / 2
-	add_child(layout)
-	remove_child(grid)
+	layout.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	layout.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	layout.add_child(bar)
 	layout.add_child(grid)
+
+	var center := CenterContainer.new()
+	center.name = "InventoryLayout"
+	var spacing: float = bar.custom_minimum_size.y + 4.0
+	center.anchor_left = grid.anchor_left
+	center.anchor_right = grid.anchor_right
+	center.anchor_top = grid.anchor_top
+	center.anchor_bottom = grid.anchor_bottom
+	center.offset_left = grid.offset_left
+	center.offset_right = grid.offset_right
+	center.offset_top = grid.offset_top - spacing / 2.0
+	center.offset_bottom = grid.offset_bottom + spacing / 2.0
+
+	add_child(center)
+	remove_child(grid)
+	center.add_child(layout)
 	for i in range(grid.get_child_count()):
 		_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
 	Inventory.changed.connect(func(): if visible: _update_all())
