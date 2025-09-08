@@ -11,26 +11,25 @@ func _ready() -> void:
 	visible = false
 	var bar: HBoxContainer = _create_filter_bar()
 	var layout := VBoxContainer.new()
+	layout.alignment = BoxContainer.ALIGNMENT_CENTER
 	layout.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	layout.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	layout.add_child(bar)
-	layout.add_child(grid)
 
+
+	# Reparent the existing grid under the layout so it sits below the bar
+	grid.reparent(layout)
+	grid.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	grid.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	grid.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+	# Center the whole layout within this panel
 	var center := CenterContainer.new()
 	center.name = "InventoryLayout"
-	var spacing: float = bar.custom_minimum_size.y + 4.0
-	center.anchor_left = grid.anchor_left
-	center.anchor_right = grid.anchor_right
-	center.anchor_top = grid.anchor_top
-	center.anchor_bottom = grid.anchor_bottom
-	center.offset_left = grid.offset_left
-	center.offset_right = grid.offset_right
-	center.offset_top = grid.offset_top - spacing / 2.0
-	center.offset_bottom = grid.offset_bottom + spacing / 2.0
-
-	add_child(center)
-	remove_child(grid)
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	center.add_child(layout)
+	add_child(center)
+
 	for i in range(grid.get_child_count()):
 		_prepare_inventory_slot(grid.get_child(i) as Control, Vector2(64, 64))
 	Inventory.changed.connect(func(): if visible: _update_all())
@@ -57,7 +56,7 @@ func _process(_delta: float) -> void:
 					_update_all()
 
 func _update_all() -> void:
-	var ids: Array[String] = Inventory.get_sorted_ids(sort_order, current_category)
+	var ids: Array[String] = Inventory.get_sorted_ids(sort_order, current_category) as Array[String]
 
 	for slot in grid.get_children():
 				var icon := slot.get_node_or_null("Icon") as TextureRect
