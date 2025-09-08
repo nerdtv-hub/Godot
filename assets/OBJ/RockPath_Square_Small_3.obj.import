@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://df6w2ts2rho1c"
+path="res://.godot/imported/RockPath_Square_Small_3.obj-342e542da7c848e567495f149d9994da.mesh"
+
+[deps]
+
+files=["res://.godot/imported/RockPath_Square_Small_3.obj-342e542da7c848e567495f149d9994da.mesh"]
+
+source_file="res://assets/OBJ/RockPath_Square_Small_3.obj"
+dest_files=["res://.godot/imported/RockPath_Square_Small_3.obj-342e542da7c848e567495f149d9994da.mesh", "res://.godot/imported/RockPath_Square_Small_3.obj-342e542da7c848e567495f149d9994da.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
