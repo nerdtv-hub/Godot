@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dt2rxb8tlaoej"
+path="res://.godot/imported/tool-hoe.obj-ff71c3db4f1f1b3ee0df009f65ceb0ee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tool-hoe.obj-ff71c3db4f1f1b3ee0df009f65ceb0ee.mesh"]
+
+source_file="res://assets/OBJ format/tool-hoe.obj"
+dest_files=["res://.godot/imported/tool-hoe.obj-ff71c3db4f1f1b3ee0df009f65ceb0ee.mesh", "res://.godot/imported/tool-hoe.obj-ff71c3db4f1f1b3ee0df009f65ceb0ee.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://en32hu2oo805"
+path="res://.godot/imported/structure-metal-floor.obj-42d7791ea221aeb5d2c66f79e31c59cc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/structure-metal-floor.obj-42d7791ea221aeb5d2c66f79e31c59cc.mesh"]
+
+source_file="res://assets/OBJ format/structure-metal-floor.obj"
+dest_files=["res://.godot/imported/structure-metal-floor.obj-42d7791ea221aeb5d2c66f79e31c59cc.mesh", "res://.godot/imported/structure-metal-floor.obj-42d7791ea221aeb5d2c66f79e31c59cc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

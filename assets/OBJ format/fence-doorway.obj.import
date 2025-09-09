@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cxdpexec0onay"
+path="res://.godot/imported/fence-doorway.obj-a9f985a9ae22b5db12306dcdf1b9736d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fence-doorway.obj-a9f985a9ae22b5db12306dcdf1b9736d.mesh"]
+
+source_file="res://assets/OBJ format/fence-doorway.obj"
+dest_files=["res://.godot/imported/fence-doorway.obj-a9f985a9ae22b5db12306dcdf1b9736d.mesh", "res://.godot/imported/fence-doorway.obj-a9f985a9ae22b5db12306dcdf1b9736d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

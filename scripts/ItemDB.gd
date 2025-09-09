@@ -13,6 +13,7 @@ class ItemInfo:
 	var icon: Texture2D
 	var mesh: Mesh
 	var shape: Shape3D
+	var texture: StandardMaterial3D
 	var category: String
 	var subcategory: String
 	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D, _category: String, _subcategory: String = "") -> void:
@@ -31,6 +32,7 @@ var data: Dictionary = {
 		"res://ui/icons/stone.png",
 		BoxMesh.new(),
 		BoxShape3D.new(),
+		"res://assets/Textures/Rocks_Diffuse.png",
 		"material",
 	),
 	"wood": ItemInfo.new(

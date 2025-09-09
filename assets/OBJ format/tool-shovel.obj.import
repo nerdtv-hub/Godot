@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3n2kk08g5ej7"
+path="res://.godot/imported/tool-shovel.obj-0755289c719f19f9b39959f5dc087095.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tool-shovel.obj-0755289c719f19f9b39959f5dc087095.mesh"]
+
+source_file="res://assets/OBJ format/tool-shovel.obj"
+dest_files=["res://.godot/imported/tool-shovel.obj-0755289c719f19f9b39959f5dc087095.mesh", "res://.godot/imported/tool-shovel.obj-0755289c719f19f9b39959f5dc087095.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

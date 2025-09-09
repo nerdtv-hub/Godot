@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c74nviuslacnh"
+path="res://.godot/imported/rock-sand-b.obj-627282debdce5083632a0f48107a144d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rock-sand-b.obj-627282debdce5083632a0f48107a144d.mesh"]
+
+source_file="res://assets/OBJ format/rock-sand-b.obj"
+dest_files=["res://.godot/imported/rock-sand-b.obj-627282debdce5083632a0f48107a144d.mesh", "res://.godot/imported/rock-sand-b.obj-627282debdce5083632a0f48107a144d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://kat7h6hway7k"
+path="res://.godot/imported/metal-panel-narrow.obj-e187d5f7259680961657b965d9ed181a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/metal-panel-narrow.obj-e187d5f7259680961657b965d9ed181a.mesh"]
+
+source_file="res://assets/OBJ format/metal-panel-narrow.obj"
+dest_files=["res://.godot/imported/metal-panel-narrow.obj-e187d5f7259680961657b965d9ed181a.mesh", "res://.godot/imported/metal-panel-narrow.obj-e187d5f7259680961657b965d9ed181a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

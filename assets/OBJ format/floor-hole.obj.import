@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c7os2b2o3gifo"
+path="res://.godot/imported/floor-hole.obj-ea0796a7b20d36fd4a1d7e06a927ae5d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor-hole.obj-ea0796a7b20d36fd4a1d7e06a927ae5d.mesh"]
+
+source_file="res://assets/OBJ format/floor-hole.obj"
+dest_files=["res://.godot/imported/floor-hole.obj-ea0796a7b20d36fd4a1d7e06a927ae5d.mesh", "res://.godot/imported/floor-hole.obj-ea0796a7b20d36fd4a1d7e06a927ae5d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cm7wr3qk7xf2q"
+path="res://.godot/imported/resource-planks.obj-e73a964457bcf8fee7469ba5686faada.mesh"
+
+[deps]
+
+files=["res://.godot/imported/resource-planks.obj-e73a964457bcf8fee7469ba5686faada.mesh"]
+
+source_file="res://assets/OBJ format/resource-planks.obj"
+dest_files=["res://.godot/imported/resource-planks.obj-e73a964457bcf8fee7469ba5686faada.mesh", "res://.godot/imported/resource-planks.obj-e73a964457bcf8fee7469ba5686faada.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
