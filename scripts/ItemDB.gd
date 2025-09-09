@@ -7,7 +7,7 @@ const CATEGORY_TREE := {
 		"tool": [],
 }
 
-class ItemInfo:
+class ItemInfo extends RefCounted:
 	var id: String
 	var name: String
 	var icon: Texture2D
@@ -16,7 +16,8 @@ class ItemInfo:
 	var texture: StandardMaterial3D
 	var category: String
 	var subcategory: String
-	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D, _category: String, _subcategory: String = "") -> void:
+	var drop_scale: float
+	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D, _category: String, _subcategory: String = "", _drop_scale: float = 1.0) -> void:
 			id = _id
 			name = _name
 			icon = load(_icon_path) as Texture2D
@@ -24,33 +25,46 @@ class ItemInfo:
 			shape = _shape
 			category = _category
 			subcategory = _subcategory
+			
+			
+# Preload item meshes and collision shapes from OBJ models.
+var STONE_MESH: Mesh = load("res://assets/OBJ format/resource-stone.obj")
+var STONE_SHAPE: Shape3D = STONE_MESH.create_convex_shape()
+var WOOD_MESH: Mesh = load("res://assets/OBJ format/resource-wood.obj")
+var WOOD_SHAPE: Shape3D = WOOD_MESH.create_convex_shape()
+var FISH_MESH: Mesh = load("res://assets/OBJ format/fish-large.obj")
+var FISH_SHAPE: Shape3D = FISH_MESH.create_convex_shape()
 
 var data: Dictionary = {
 	"stone": ItemInfo.new(
 		"stone",
 		"Stone",
 		"res://ui/icons/stone.png",
-		BoxMesh.new(),
-		BoxShape3D.new(),
-		"res://assets/Textures/Rocks_Diffuse.png",
+		STONE_MESH,
+		STONE_SHAPE,
 		"material",
+		"",
+		6.0
 	),
 	"wood": ItemInfo.new(
 		"wood",
 		"Wood",
 		"res://ui/icons/wood.png",
-		CylinderMesh.new(),
-		CylinderShape3D.new(),
+		WOOD_MESH,
+		WOOD_SHAPE,
 		"material",
+		"",
+		6.0
 	),
 	"fish": ItemInfo.new(
 		"fish",
 		"Fish",
 		"res://ui/icons/fish.png",
-		PrismMesh.new(),
-		BoxShape3D.new(),
+		FISH_MESH,
+		FISH_SHAPE,
 		"cooking",
-		"food"
+		"food",
+		4.0
 	),
 	
 	"cake": ItemInfo.new(
@@ -60,7 +74,8 @@ var data: Dictionary = {
 		TorusMesh.new(),
 		CylinderShape3D.new(),
 		"cooking",
-		"food"
+		"food",
+		4.0
 	),
 	}
 	
@@ -98,6 +113,7 @@ func create_pickup(id: String) -> RigidBody3D:
 		var drop := RigidBody3D.new()
 		drop.set_script(load("res://scripts/ItemPickup.gd"))
 		drop.item_id = id
+		drop.scale = Vector3.ONE * float(info.get("drop_scale"))
 		var mesh_instance := MeshInstance3D.new()
 		mesh_instance.mesh = info.mesh
 		drop.add_child(mesh_instance)

@@ -21,7 +21,7 @@ extends CharacterBody3D
 
 @onready var head: Node3D = $Head
 @onready var camera_pivot: Node3D = $Head/CameraPivot
-#@onready var interact_ray: RayCast3D = $Head/InteractRay
+@onready var interact_ray: RayCast3D = $Head/InteractRay
 @onready var reach_cast: ShapeCast3D = $Head/ReachCast
 @onready var reach_cone: MeshInstance3D = $Head/ReachCast/ReachCone
 
@@ -43,16 +43,18 @@ func _ready() -> void:
 	cone_mesh.bottom_radius = reach_radius
 	cone_mesh.height        = reach_distance
 	reach_cone.mesh = cone_mesh
-	#interact_ray.add_exception(floor_node)
+	interact_ray.add_exception(floor_node)
 	reach_cast.add_exception(floor_node)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#interact_ray.enabled = true
+	interact_ray.enabled = true
 	# Eigenen Körper ignorieren (beides schadet nicht):
-	#interact_ray.exclude_parent = true
-	#interact_ray.add_exception(self)
+	interact_ray.exclude_parent = true
+	interact_ray.add_exception(self)
 	reach_cast.shape = cone_mesh.create_convex_shape()
 	reach_cast.add_exception(self)
 	reach_cast.exclude_parent = true
+	collision_mask = collision_mask | (1 << 1)
+	reach_cast.collision_mask = 1
 
 		
 		
@@ -84,11 +86,11 @@ func _physics_process(_delta: float) -> void:
 	reach_cone.global_transform = reach_cast.global_transform
 
 	# Ray an Blickrichtung koppeln
-	#interact_ray.global_transform = Transform3D(
-		#camera_pivot.global_transform.basis,
-		#interact_ray.global_transform.origin
-	#)
-	#interact_ray.target_position = Vector3(0.0, 0.0, -interact_distance)
+	interact_ray.global_transform = Transform3D(
+		camera_pivot.global_transform.basis,
+		interact_ray.global_transform.origin
+	)
+	interact_ray.target_position = Vector3(0.0, 0.0, -interact_distance)
 	
 	var input2d: Vector2 = Vector2(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
