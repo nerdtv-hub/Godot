@@ -18,22 +18,20 @@ height = 1.8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ujki3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tdgyr"]
-size = Vector3(250, 1, 250)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ajvwt"]
 load_path = "res://.godot/imported/Rocks_Diffuse.png-0bff66d0449a6b34d0b2998eb57b618e.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_28juv"]
 albedo_texture = SubResource("CompressedTexture2D_ajvwt")
 
-[sub_resource type="BoxMesh" id="BoxMesh_5waxb"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdkoc"]
-shading_mode = 0
-albedo_color = Color(0.245835, 0.378884, 0.0869614, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwufm"]
+albedo_color = Color(0.194569, 0.558126, 0.176049, 1)
 albedo_texture = ExtResource("2_ejvxo")
-uv1_scale = Vector3(55, 55, 55)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vfdcn"]
+material = SubResource("StandardMaterial3D_cwufm")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dvp8r"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_k0fpm"]
 points = PackedVector3Array(-0.0219947, 0, -0.0711082, -0.0515314, 0, -0.036807, -0.0415617, 0.1068, -0.019545, -0.0108436, 0.0514346, -0.051772, 0.0477766, 0, -0.0711082, -0.0826703, 0, 0.0171506, -0.0627472, 0.1068, 0.0171506, 0.00080923, 0.1068, -0.019545, 0.0366093, 0.0514346, -0.051772, 0.0603358, 0.0514346, -0.0106913, 0.0826703, 0, -0.0106913, -0.0515314, 0, 0.0711082, -0.0415617, 0.1068, 0.0538323, 0.0219785, 0.1068, 0.0171506, 0.0477766, 0, 0.0497395, 0.00080923, 0.1068, 0.0538323, 0.0107789, 0, 0.0711082)
@@ -86,7 +84,6 @@ transform = Transform3D(1, 0, 0, 0, 0.821149, 0.570714, 0, -0.570714, 0.821149, 
 shadow_enabled = true
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.336782, 0)
 script = ExtResource("1_yo1nn")
 push_apply_at_contact = true
 
@@ -130,14 +127,14 @@ script = ExtResource("2_vmowd")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_tdgyr")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(-250, 8.74228e-08, 0, -2.18557e-05, -1, 0, 0, 0, 250, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_28juv")
-mesh = SubResource("BoxMesh_5waxb")
-surface_material_override/0 = SubResource("StandardMaterial3D_kdkoc")
+mesh = SubResource("PlaneMesh_vfdcn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 0, -1.3411e-07)
+shape = SubResource("WorldBoundaryShape3D_dvp8r")
 
 [node name="Stone_1" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41991, 1.37265, -7.79687)

@@ -16,7 +16,7 @@ class ItemInfo extends RefCounted:
 	var texture: StandardMaterial3D
 	var category: String
 	var subcategory: String
-	var drop_scale: float
+	var drop_scale: float = 1.0
 	func _init(_id: String, _name: String, _icon_path: String, _mesh: Mesh, _shape: Shape3D, _category: String, _subcategory: String = "", _drop_scale: float = 1.0) -> void:
 			id = _id
 			name = _name
@@ -25,7 +25,7 @@ class ItemInfo extends RefCounted:
 			shape = _shape
 			category = _category
 			subcategory = _subcategory
-			
+			drop_scale = _drop_scale
 			
 # Preload item meshes and collision shapes from OBJ models.
 var STONE_MESH: Mesh = load("res://assets/OBJ format/resource-stone.obj")
@@ -113,11 +113,12 @@ func create_pickup(id: String) -> RigidBody3D:
 		var drop := RigidBody3D.new()
 		drop.set_script(load("res://scripts/ItemPickup.gd"))
 		drop.item_id = id
-		drop.scale = Vector3.ONE * float(info.get("drop_scale"))
 		var mesh_instance := MeshInstance3D.new()
 		mesh_instance.mesh = info.mesh
+		mesh_instance.scale = Vector3.ONE * info.drop_scale
 		drop.add_child(mesh_instance)
 		var coll := CollisionShape3D.new()
 		coll.shape = info.shape
+		coll.scale = Vector3.ONE * info.drop_scale
 		drop.add_child(coll)
 		return drop
