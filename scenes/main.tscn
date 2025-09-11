@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0x3dbekkvcyu"]
 
-[ext_resource type="Script" path="res://scenes/main.gd" id="1_1mx6e"]
+[ext_resource type="Script" uid="uid://c1tyscujwlh8d" path="res://scenes/main.gd" id="1_1mx6e"]
 [ext_resource type="PackedScene" uid="uid://c4naigkk10ri6" path="res://scenes/Game/game_world.tscn" id="1_dgpkx"]
-[ext_resource type="Script" path="res://scenes/Game/GameWorld.gd" id="3_cpqwj"]
+[ext_resource type="Script" uid="uid://dql7x7aoa8y7v" path="res://scenes/Game/GameWorld.gd" id="3_cpqwj"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_1mx6e")
