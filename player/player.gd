@@ -159,14 +159,27 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("interact"):
-		# Erst Nahbereich prüfen
+		interact_ray.force_raycast_update()
+		var target: Node = _resolve_interactable_from_collider(interact_ray.get_collider())
+		if target and target.has_method("interact"):
+			target.interact(self)
+			return
 		reach_cast.force_shapecast_update()
-		if reach_cast.is_colliding():
-			var hit := reach_cast.get_collider(0)
-			var target: Node = _resolve_interactable_from_collider(hit)
-			if target and target.has_method("interact"):
-				target.interact(self)
-				return
+		var best: Node = null
+		var best_dist := INF
+		var origin := head.global_transform.origin
+		for i in range(reach_cast.get_collision_count()):
+			var hit := reach_cast.get_collider(i)
+			var cand := _resolve_interactable_from_collider(hit)
+			if cand == null or not cand.has_method("interact"):
+				continue
+			var dist := reach_cast.get_collision_point(i).distance_to(origin)
+			if dist < best_dist:
+				best_dist = dist
+				best = cand
+		if best:
+			best.interact(self)
+			return
 	if Input.is_action_just_pressed("drop"):
 		_drop_selected()
 		#_debug_dump_ray()

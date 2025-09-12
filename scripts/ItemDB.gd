@@ -56,7 +56,7 @@ var data: Dictionary = {
 				"res://ui/icons/cake.png",
 				"cooking",
 				"food",
-				4.0
+				1.0
 		),
 		}
 	
@@ -100,8 +100,17 @@ func init_templates(world: Node) -> void:
 						node.queue_free()
 
 
-func create_pickup(id: String) -> RigidBody3D:
+func create_pickup(id: String, amount: int = 1) -> RigidBody3D:
 		var template: Node = pickup_templates.get(id, null)
 		if template:
-				return template.duplicate() as RigidBody3D
+				var pickup := template.duplicate() as RigidBody3D
+				pickup.item_id = id
+				pickup.amount = amount
+				var info := get_info(id)
+				if info:
+						for child in pickup.get_children():
+								if child is MeshInstance3D or child is CollisionShape3D:
+										child.scale = Vector3.ONE * info.drop_scale
+						pickup.scale = Vector3.ONE * info.drop_scale
+				return pickup
 		return null
