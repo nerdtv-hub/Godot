@@ -11,7 +11,11 @@ var hotbar_slots: Array[String] = []
 
 
 func _ready() -> void:
-		hotbar_slots.resize(HOTBAR_SIZE)
+	hotbar_slots.resize(HOTBAR_SIZE)
+	add_item("stone", 20)
+	add_item("wood", 3)
+	add_item("fish", 3)
+	add_item("cake", 3)
 
 func set_hotbar_slot(index: int, id: String) -> void:
 		if index < 0 or index >= HOTBAR_SIZE:
