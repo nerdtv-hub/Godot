@@ -53,8 +53,11 @@ func _ready() -> void:
 	reach_cast.shape = cone_mesh.create_convex_shape()
 	reach_cast.add_exception(self)
 	reach_cast.exclude_parent = true
-	collision_mask = collision_mask | (1 << 1)
-	reach_cast.collision_mask = 1
+	# Allow interaction and collision with pickups on layer 2
+	collision_mask |= 1 << 1
+	reach_cast.collision_mask = 3
+	interact_ray.collision_mask |= 1 << 1
+
 
 		
 		
